@@ -153,7 +153,7 @@
 .flapper {
     font-size: 51px;
     line-height: 52px;
-    height: 58px;
+    height: 66px;
 }
 
 .flapper .digit {
@@ -282,7 +282,7 @@
 .flapper .digit div {
     color: #f0f0f0;
     padding: 0px;
-    background-color: black;
+    background-color: #111;
 }
 
 /* LIGHT */
