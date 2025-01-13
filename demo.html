@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>FLAPPER DEMO</title>
+        <title>Nanotronics Quotes</title>
         <link href="css/flapper.css" type="text/css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="transform/dist/jquery.transform-0.9.3.min.js"></script>
@@ -13,7 +13,7 @@
             }
 
             .page {
-                width: 1000px;
+                width: 1140px;
                 margin: 30px auto 0;
             }
 
@@ -23,10 +23,9 @@
             }
 
             .displays {
-                padding: 30px;
-                border: 10px solid #ccc;
-                background-color: #222;
-                border-radius: 30px;
+                padding: 60px;
+                background-color: #000;
+                border-radius: 0px;
                 box-shadow: 0 0 12px 4px #000 inset;
             }
 
@@ -71,37 +70,6 @@
             div.activity.active {
                 background-color: #f00;
             }
-
-            #fork-me {
-                display: none;
-                width: 180px;
-                height: 150px;
-                position: absolute;
-                top: 0px;
-                right: 0px;
-                overflow: hidden;
-            }
-
-            #fork-me a {
-                display: block;
-                position: absolute;
-                top: 35px;
-                right: -75px;
-                padding: 0.75em 4em;
-                background: #881c15;
-                -webkit-transform: rotate(40deg);
-                -moz-transform: rotate(40deg);
-                -o-transform: rotate(40deg);
-                -ms-transform: rotate(40deg);
-                color: white !important;
-                font-weight: bold;
-                font-family: helvetica;
-                text-decoration: none;
-                border: 1px solid white;
-                box-shadow: 0 0 10px black;
-                text-shadow: 0 0 10px black;
-                white-space: nowrap;
-            }
         </style>
     </head>
     <body>
@@ -117,13 +85,10 @@
                 <div class="activity"></div><input class="display M" />
                 <div class="activity"></div><input class="display M" />
             </div>
-            <div class="inputarea">
+<!--             <div class="inputarea">
                 <div class="inline"><textarea id="typesomething" placeholder="Type Something Here..." rows="6" cols="20"></textarea></div>
                 <div class="inline"><button id="showme">And Click Here</button></div>
-            </div>
-        </div>
-        <div id="fork-me">
-            <a href="https://github.com/jayKayEss/Flapper">Fork me on GitHub</a>
+            </div> -->
         </div>
         <script>
             async function fetchQuotes() {
