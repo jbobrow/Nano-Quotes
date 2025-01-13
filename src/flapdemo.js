@@ -54,8 +54,8 @@ var FlapDemo = function(display_selector, input_selector, click_selector) {
 
     this.opts = {
         chars_preset: 'alphanum',
-        align: 'left',
-        width: 20,
+        align: 'center',
+        width: 22,
         on_anim_start: onAnimStart,
         on_anim_end: onAnimEnd
     };
