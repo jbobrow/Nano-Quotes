@@ -36,30 +36,21 @@
             }
 
             .inputarea {
-                margin: 24px 0;
+                display: none; /* Hide input area */
             }
 
-            #typesomething,
-            #showme {
-                font-family: Roboto Condensed;
-                font-size: 18px;
-                padding: 14px;
-                background-color: #EEE;
-                color: #333;
-                border: 0;
-                height: 170px;
+            #quote {
+                font-size: 1.8em;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 10px;
+                color: #fff;
             }
 
-            #typesomething {
-                width: 300px;
-            }
-
-            #showme:hover {
-                background-color: #DDD;
-            }
-
-            #showme:active {
-                background-color: #CCC;
+            #author {
+                font-size: 1.2em;
+                color: gray;
+                text-align: center;
             }
 
             div.inline {
@@ -81,10 +72,8 @@
                 background-color: #f00;
             }
 
-            /* Greetz @deadlyicon
-             * https://gist.github.com/2191622
-             */
             #fork-me {
+                display: none;
                 width: 180px;
                 height: 150px;
                 position: absolute;
@@ -101,9 +90,9 @@
                 padding: 0.75em 4em;
                 background: #881c15;
                 -webkit-transform: rotate(40deg);
-                -moz-transform:rotate(40deg);
-                -o-transform:rotate(40deg);
-                -ms-transform:rotate(40deg);
+                -moz-transform: rotate(40deg);
+                -o-transform: rotate(40deg);
+                -ms-transform: rotate(40deg);
                 color: white !important;
                 font-weight: bold;
                 font-family: helvetica;
@@ -113,12 +102,13 @@
                 text-shadow: 0 0 10px black;
                 white-space: nowrap;
             }
-
         </style>
     </head>
     <body>
         <div class="page">
-            <h1>FLAPPER DEMO</h1>
+            <!-- <h1>FLAPPER DEMO</h1> -->
+            <div id="quote">Loading quote...</div>
+            <div id="author"></div>
             <div class="displays">
                 <div class="activity"></div><input class="display M" />
                 <div class="activity"></div><input class="display M" />
@@ -135,16 +125,57 @@
         <div id="fork-me">
             <a href="https://github.com/jayKayEss/Flapper">Fork me on GitHub</a>
         </div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        <script>
+            async function fetchQuotes() {
+                try {
+                    const response = await fetch('quotes.csv');
+                    const csvText = await response.text();
+                    return parseCSV(csvText);
+                } catch (error) {
+                    console.error('Failed to fetch quotes:', error);
+                    return [];
+                }
+            }
 
-  ga('create', 'UA-20194861-3', 'auto');
-  ga('send', 'pageview');
+            function parseCSV(csvText) {
+                const rows = csvText.split('\n').slice(1); // Skip header row
+                return rows
+                    .map(row => {
+                        const columns = row.split(',');
+                        if (columns.length < 3) return null; // Ensure there are at least 3 columns
+                        const [date, quote, author] = columns;
+                        return {
+                            date: date?.trim(),
+                            quote: quote?.trim(),
+                            author: author?.trim(),
+                        };
+                    })
+                    .filter(row => row && row.quote && row.author); // Remove empty or invalid rows
+            }
 
-</script>
+            function displayQuote(quotes) {
+                if (quotes.length === 0) {
+                    document.getElementById('quote').textContent = 'No quotes available.';
+                    document.getElementById('author').textContent = '';
+                    return;
+                }
+
+                const randomIndex = Math.floor(Math.random() * quotes.length);
+                const { quote, author } = quotes[randomIndex];
+
+                document.getElementById('quote').textContent = quote;
+                document.getElementById('author').textContent = `- ${author}`;
+            }
+
+            async function init() {
+                const quotes = await fetchQuotes();
+                if (quotes.length > 0) {
+                    displayQuote(quotes);
+                    setInterval(() => displayQuote(quotes), 10000); // Update every 10 seconds
+                }
+            }
+
+            init();
+        </script>
     </body>
 </html>
-
