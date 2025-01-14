@@ -3,8 +3,9 @@
 /* STRUCTURAL STYLES */
 
 .flapper {
-    font-family: Roboto Condensed, sans-serif;
-    font-weight: 300;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 400;
+    text-transform: capitalize;
     box-sizing: content-box;
     -moz-box-sizing: content-box;
     -webkit-box-sizing: content-box;
@@ -151,13 +152,13 @@
 /* M 40x54 (default) */
 
 .flapper {
-    font-size: 51px;
+    font-size: 42px;
     line-height: 52px;
     height: 66px;
 }
 
 .flapper .digit {
-    border-radius: 5px;
+    border-radius: 4px;
     margin: 0 0 0 4px;
 }
 
@@ -275,14 +276,14 @@
 /* DARK (default) */
 
 .flapper .digit {
-    background-color: #222;
-    border: 1px solid #333;
+    background-color: #2A2A2A;
+    border: 1px solid #3A3A3A;
 }
 
 .flapper .digit div {
     color: #f0f0f0;
     padding: 0px;
-    background-color: #111;
+    background-color: #1A1A1A;
 }
 
 /* LIGHT */
