@@ -14,8 +14,8 @@
             }
 
             .page {
-                width: 1140px;
-                margin: 60px auto 0;
+                width: 1200px;
+                margin: 100px auto 0;
             }
 
             h1 {
@@ -24,7 +24,7 @@
             }
 
             .displays {
-                padding: 60px;
+                padding: 80px;
                 background-color: #000;
                 border-radius: 0px;
                 box-shadow: 0 0 12px 4px #000 inset;
@@ -163,7 +163,7 @@
                 const quotes = await fetchQuotes();
                 if (quotes.length > 0) {
                     displayQuote(quotes);
-                    setInterval(() => displayQuote(quotes), 10000); // Update every 10 seconds
+                    setInterval(() => displayQuote(quotes), 30000); // Update every 30 seconds
                 }
             }
 
