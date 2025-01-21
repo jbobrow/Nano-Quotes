@@ -15,7 +15,7 @@
 
             .page {
                 width: 1200px;
-                margin: 100px auto 0;
+                margin: 50px auto 0;
             }
 
             h1 {
@@ -54,13 +54,26 @@
                 text-align: center;
             }
             #thanks {
-                display: none;
-                font-family: Courier;
-                font-weight: lighter;
-                font-size: 1.4em;
-                color: #ffffff;
-                text-shadow: 2px 2px 2px rgba(0,0,0,0.1);
-                text-align: center;                
+/*                display: none;*/
+                max-width: 600px;
+                height: 40%;
+                margin: 0 auto;
+                font-family: "Helvetica Neue", Arial, sans-serif;
+                font-size: 1em;
+                line-height: 1.5em;
+                color: #444;
+                text-align: justify;
+                align-content: center;                
+            }
+
+            #thanks a {
+                color: #888;
+                text-decoration: none;
+            }
+
+            #thanks a:hover {
+                color: #444;
+                text-decoration: underline;
             }
 
             div.inline {
@@ -95,7 +108,7 @@
                 <div class="activity"></div><input class="display M" />
             </div>
             <div id="thanks">
-                <p>Thanks to Paul Henrique for providing these quotes day in, day out.<br>Now we share them with you.</p>
+                <p>At <a href="https://nanotronics.ai">Nanotronics</a>, many of us start each morning walking into Building 20, greeted by a mechanical display board, much like the one found in old train stations. This digital display board is populated with quotes that have been shared with the Nanotronics family over the years and will continue to update with quotes selected by Paul Henrique, Security Manager for Building 20 since 2019. We hope these quotes provide inspiration for you, just like they have for us&#8212;day in, day out.</p>
             </div>
 <!--             <div class="inputarea">
                 <div class="inline"><textarea id="typesomething" placeholder="Type Something Here..." rows="6" cols="20"></textarea></div>
@@ -120,24 +133,43 @@
                 const rows = csvText.split('\n').slice(1); // Skip header row
                 return rows
                     .map(row => {
-                        const columns = row.split(',');
-                        if (columns.length < 3) return null; // Ensure there are at least 3 columns
-                        const [date, quote, author] = columns;
+                        // Match CSV fields, including those enclosed in double quotes
+                        const columns = row.match(/(?:[^,""]+|"[^"]*")+/g);
+                        if (!columns || columns.length < 3) return null; // Ensure there are at least 3 columns
+
+                        // Remove surrounding quotes from fields and trim whitespace
+                        const [date, quote, author] = columns.map(col =>
+                            col.replace(/^"|"$/g, '').trim()
+                        );
+
                         return {
-                            date: date?.trim(),
-                            quote: quote?.trim(),
-                            author: author?.trim(),
+                            date,
+                            quote,
+                            author,
                         };
                     })
-                    .filter(row => row && row.quote && row.author); // Remove empty or invalid rows
+                    .filter(row => 
+                        row && 
+                        row.quote && 
+                        row.author && 
+                        row.quote.length <= 100 // Filter out long quotes
+                    ); // Remove empty, invalid, or overly long quotes
             }
 
             function formatQuoteForDisplay(quote, author, wrap, numLines) {
-                const fullText = `${quote}                   -${author}`;
+                const quoteText = `${quote}`;
                 const buffer = new FlapBuffer(wrap, numLines);
-                const words = fullText.split(/\s+/);
+                const words = quote.split(/\s+/);
+                const authorName = `${author}`;
+                const authorNameWords = authorName.split(/\s+/);
 
+                // add quote
                 words.forEach(word => buffer.pushWord(word));
+                buffer.flush();
+
+                // add author on the next line
+                buffer.pushWord(`-`);
+                authorNameWords.forEach(nameWord => buffer.pushWord(nameWord));
                 buffer.flush();
 
                 // console.log('Formatted buffers:', buffer.buffers);
