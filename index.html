@@ -67,9 +67,9 @@
                 line-height: 27px;
                 color: #00000099;
                 text-align: justify;
-                padding-top: 18px;
+/*                padding-top: 18px;
                 border-top: 1px solid #00000044;                
-            }
+*/            }
 
             a {
                 color: #00000066;
@@ -120,6 +120,33 @@
                 color: #fff;
                 background: #ED1C24;
             }
+
+            .timer-container {
+              width: 100%; /* Full width of the line */
+              height: 1px; /* Height of the line */
+              background-color: #00000011; /* Gray line background */
+              overflow: hidden; /* Ensure the black line stays within bounds */
+              position: relative;
+            }
+
+            .timer-line {
+              width: 100%; /* Initially full width */
+              height: 100%; /* Match the container height */
+              background-color: #00000033; /* Black line color */
+              position: absolute;
+              top: 0;
+              left: 0;
+              animation: shrink 30s linear infinite; /* Shrink every 30 seconds */
+            }
+
+            @keyframes shrink {
+              0% {
+                width: 100%; /* Start with full width */
+              }
+              100% {
+                width: 0; /* Shrink to 0 width */
+              }
+            }
         </style>
     </head>
     <body>
@@ -134,6 +161,9 @@
                 <div class="activity"></div><input class="display M" />
             </div>
             <div id="thanks">
+            <div class="timer-container">
+                <div class="timer-line"></div>
+            </div>
                 <p>At <a href="https://nanotronics.ai">Nanotronics</a>, I begin each morning entering <a href="https://nanotronics.ai/overview">Building 20</a>, where I&#8217;m greeted by a mechanical display board, reminiscent of one found in an old train station. This digital display board is populated with quotes that have been shared with the Nanotronics family since I joined the company in 2023. These quotes were selected by Paul Henrique, Security Manager for Building 20. I hope these quotes provide inspiration for you, just like they have for me&#8212;day in, day out.<br><br>&#8211; Jonathan Bobrow, UX/UI Designer</p>
 
                 <svg id="nano_sticker" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.35 143.28">
