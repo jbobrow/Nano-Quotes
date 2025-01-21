@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Welcome to Nanotronics</title>
+        <title>Nanotronics | Daily Inspiration</title>
         <link href="css/flapper.css" type="text/css" rel="stylesheet" />
         <script src="libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="transform/dist/jquery.transform-0.9.3.min.js"></script>
@@ -8,7 +8,7 @@
         <script src="src/flapdemo.js"></script>
         <style type="text/css">
             body {
-                font-family: "Helvetica Neue", Arial, sans-serif;
+                font-family: "Neue Montreal", "Helvetica Neue", Arial, sans-serif;
                 color: #333;
                 background-color: #fff;
             }
@@ -53,27 +53,39 @@
                 color: #000;
                 text-align: center;
             }
+
             #thanks {
-/*                display: none;*/
                 max-width: 600px;
                 height: 40%;
                 margin: 0 auto;
-                font-family: "Helvetica Neue", Arial, sans-serif;
-                font-size: 1em;
-                line-height: 1.5em;
-                color: #444;
+                align-content: center;
+            }
+
+            #thanks p {
+                font-family: "PP Neue Montreal", "Helvetica Neue", Arial, sans-serif;
+                font-size: 18px;
+                line-height: 27px;
+                color: #00000099;
                 text-align: justify;
-                align-content: center;                
+                padding-top: 18px;
+                border-top: 1px solid #00000044;                
             }
 
             #thanks a {
-                color: #888;
+                color: #00000066;
                 text-decoration: none;
             }
 
             #thanks a:hover {
-                color: #444;
+                color: #000000AA;
                 text-decoration: underline;
+            }
+
+            #nano_sticker {
+                display: block;
+                margin: auto;
+                width: 50px;
+                height: 50px;
             }
 
             div.inline {
@@ -92,7 +104,12 @@
             }
 
             div.activity.active {
-                background-color: #f00;
+                background-color: #ED1C24;
+            }
+
+            ::selection {
+                color: #fff;
+                background: #ED1C24;
             }
         </style>
     </head>
@@ -108,12 +125,24 @@
                 <div class="activity"></div><input class="display M" />
             </div>
             <div id="thanks">
-                <p>At <a href="https://nanotronics.ai">Nanotronics</a>, many of us start each morning walking into Building 20, greeted by a mechanical display board, much like the one found in old train stations. This digital display board is populated with quotes that have been shared with the Nanotronics family over the years and will continue to update with quotes selected by Paul Henrique, Security Manager for Building 20 since 2019. We hope these quotes provide inspiration for you, just like they have for us&#8212;day in, day out.</p>
+                <p>At <a href="https://nanotronics.ai">Nanotronics</a>, I begin each morning entering <a href="https://nanotronics.ai/overview">Building 20</a>, where I&#8217;m greeted by a mechanical display board, reminiscent of one found in an old train station. This digital display board is populated with quotes that have been shared with the Nanotronics family since I joined the company in 2023. These quotes were selected by Paul Henrique, Security Manager for Building 20. I hope these quotes provide inspiration for you, just like they have for me&#8212;day in, day out.<br><br>&#8211; Jonathan Bobrow, UX/UI Designer</p>
+
+                <svg id="nano_sticker" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.35 143.28">
+                  <defs>
+                    <style>
+                      .cls-1 {
+                        fill: #ed1c24;
+                      }
+
+                      .cls-2 {
+                        fill: #fff;
+                      }
+                    </style>
+                  </defs>
+                  <circle class="cls-2" cx="71.68" cy="72.28" r="63"/>
+                  <path class="cls-1" d="M104.35,99.78h-16.53l-15.65-27.83-31.73,45.58V47.22h17.82l13.91,24.73,32.18-46.2v74.03ZM72.18,0C32.31,0,0,32.08,0,71.64s32.31,71.64,72.18,71.64,72.17-32.08,72.17-71.64S112.04,0,72.18,0"/>
+                </svg>
             </div>
-<!--             <div class="inputarea">
-                <div class="inline"><textarea id="typesomething" placeholder="Type Something Here..." rows="6" cols="20"></textarea></div>
-                <div class="inline"><button id="showme">And Click Here</button></div>
-            </div> -->
         </div>
         <script>
             let flapDemo;
