@@ -1,8 +1,8 @@
 Nano Quotes
 =======
 
-[Nano Quotes | Daily Inspiration](https://jbobrow.github.io/Nano-Quotes/)
-
+[Nanotronics | Daily Inspiration](https://jbobrow.github.io/Nano-Quotes/)
+[![Screenshot 2025-01-23 at 11 50 54 PM](https://github.com/user-attachments/assets/1effc713-cad2-4ba6-8d14-53ff07a258bb)](https://jbobrow.github.io/Nano-Quotes/)
 
 At Nanotronics, I begin each morning entering Building 20, where I’m greeted by a mechanical display board, reminiscent of one found in an old train station. This digital display board is populated with quotes that have been shared with the Nanotronics family since I joined the company in 2023. These quotes were selected by Paul Henrique, Security Manager for Building 20. I hope these quotes provide inspiration for you, just like they have for me—day in, day out.
 
