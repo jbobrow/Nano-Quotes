@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Nanotronics | Daily Inspiration</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <!-- Unfurl Meta -->
         <meta property="og:url" content="https://jbobrow.github.io/Nano-Quotes/"/>
         <meta property="og:title" content="Nanotronics | Daily Inspiration"/>
@@ -71,7 +73,7 @@
             }
 
             .inputarea {
-                display: none; /* Hide input area */
+                display: none;
             }
 
             #quote {
@@ -102,9 +104,7 @@
                 line-height: 27px;
                 color: #00000099;
                 text-align: justify;
-/*                padding-top: 18px;
-                border-top: 1px solid #00000044;                
-*/            }
+            }
 
             a {
                 color: #00000066;
@@ -157,17 +157,17 @@
             }
 
             .timer-container {
-              width: 100%; /* Full width of the line */
-              height: 1px; /* Height of the line */
-              background-color: #00000011; /* Gray line background */
-              overflow: hidden; /* Ensure the black line stays within bounds */
+              width: 100%;
+              height: 1px;
+              background-color: #00000011;
+              overflow: hidden;
               position: relative;
             }
 
             .timer-line {
-              width: 100%; /* Initially full width */
-              height: 100%; /* Match the container height */
-              background-color: #00000033; /* Black line color */
+              width: 100%;
+              height: 100%;
+              background-color: #00000033;
               position: absolute;
               top: 0;
               left: 0;
@@ -176,17 +176,52 @@
 
             @keyframes shrink {
               0% {
-                width: 100%; /* Start with full width */
+                width: 100%;
               }
               100% {
-                width: 0; /* Shrink to 0 width */
+                width: 0;
               }
+            }
+
+            #orientation-warning {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 80%;
+                height: 100%;
+                background-color: black;
+                color: white;
+                text-align: center;
+                padding-top: 50%;
+                padding-left: 10%;
+                padding-right: 10%;
+                z-index: 1000;
+                font-family: "Neue Montreal", "Helvetica Neue", Arial, sans-serif;
+            }
+
+            @media screen and (max-width: 768px) and (orientation: portrait) {
+                #orientation-warning {
+                    display: block;
+                }
+                .displays, .page {
+                    display: none;
+                }
+            }
+
+            @media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+                .page {
+                    margin-top: 0 !important;
+                }
             }
         </style>
     </head>
     <body>
+        <div id="orientation-warning">
+            <h2>Rotate to View</h2>
+            <p>Please rotate your device horizontally to view inspirational quotes.</p>
+        </div>
         <div class="page">
-            <!-- <h1>FLAPPER DEMO</h1> -->
             <div class="displays" onClick="shareQuote()">
                 <div class="activity"></div><input class="display M" />
                 <div class="activity"></div><input class="display M" />
@@ -197,7 +232,7 @@
                 <div class="share-icon">
                     <svg id="bluesky" width="28" height="28" viewBox="0 0 512 451" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M110.976 30.336C169.696 74.4 232.832 163.776 256 211.712C279.2 163.776 342.304 74.432 401.024 30.336C443.36 -1.43998 512 -26.048 512 52.224C512 67.872 503.04 183.584 497.792 202.368C479.488 267.648 412.896 284.32 353.664 274.24C457.216 291.872 483.584 350.24 426.656 408.64C318.624 519.488 271.392 380.8 259.296 345.28C257.056 338.752 256 335.68 256 338.304C256 335.712 254.944 338.752 252.736 345.28C240.608 380.8 193.376 519.488 85.344 408.64C28.448 350.24 54.784 291.84 158.304 274.24C99.104 284.32 32.48 267.68 14.208 202.368C8.96 183.584 0 67.84 0 52.224C0 -26.048 68.64 -1.43998 110.976 30.336Z" fill="white"/>
-                        </svg>
+                    </svg>
                     <svg id="twitter" width="28" height="28" viewBox="0 0 119 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M106.774 24.9217C106.853 26.018 106.853 27.1081 106.853 28.1982C106.853 61.5587 82.3106 100 37.4585 100C23.6401 100 10.8028 95.8589 0 88.6668C1.96194 88.8986 3.85121 88.9801 5.89187 88.9801C17.2941 88.9801 27.7881 84.9956 36.1747 78.1982C25.4507 77.9664 16.4645 70.6992 13.3642 60.7004C14.872 60.9322 16.3858 61.0888 17.9723 61.0888C20.1583 61.0888 22.3564 60.7756 24.3971 60.2305C13.2128 57.8875 4.83824 47.7321 4.83824 35.4655V35.1522C8.08997 37.0254 11.8625 38.197 15.859 38.3536C9.28893 33.8303 4.98356 26.0932 4.98356 17.3412C4.98356 12.6551 6.18858 8.35735 8.3019 4.61095C20.3097 19.9161 38.3607 29.9211 58.5977 31.0174C58.2223 29.138 57.9922 27.1896 57.9922 25.2349C57.9922 11.3269 68.8676 0 82.3832 0C89.4074 0 95.7474 3.04473 100.204 7.96892C105.715 6.87257 110.995 4.76131 115.682 1.8732C113.871 7.73086 110.014 12.6551 104.958 15.7812C109.869 15.2299 114.628 13.8266 119 11.8719C115.682 16.8713 111.534 21.3256 106.774 24.9217Z" fill="white"/>
                     </svg>
@@ -226,9 +261,10 @@
                 </svg>
             </div>
             <footer>
-                Special thanks to <a href="https://jaykayess.com/Flapper/">Flapper</a> and <a href="https://jaykayess.com/">Justin Kerr Sheckler</a></footer>
+                Special thanks to <a href="https://jaykayess.com/Flapper/">Flapper</a> and <a href="https://jaykayess.com/">Justin Kerr Sheckler</a>
             </footer>
         </div>
+
         <script>
             let flapDemo;
             var shareText;
@@ -240,7 +276,12 @@
                     return parseCSV(csvText);
                 } catch (error) {
                     console.error('Failed to fetch quotes:', error);
-                    return [];
+                    return [
+                        {
+                            quote: "Inspiration is everywhere if you're willing to look.",
+                            author: "Jonathan Bobrow"
+                        }
+                    ];
                 }
             }
 
@@ -272,11 +313,9 @@
             }
 
             function formatQuoteForDisplay(quote, author, wrap, numLines) {
-                const quoteText = `${quote}`;
                 const buffer = new FlapBuffer(wrap, numLines);
                 const words = quote.split(/\s+/);
-                const authorName = `${author}`;
-                const authorNameWords = authorName.split(/\s+/);
+                const authorNameWords = author.split(/\s+/);
 
                 // add quote
                 words.forEach(word => buffer.pushWord(word));
@@ -286,8 +325,6 @@
                 buffer.pushWord(`-`);
                 authorNameWords.forEach(nameWord => buffer.pushWord(nameWord));
                 buffer.flush();
-
-                // console.log('Formatted buffers:', buffer.buffers);
 
                 return buffer.buffers;
             }
