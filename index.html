@@ -279,7 +279,7 @@
                     return [
                         {
                             quote: "Inspiration is everywhere if you're willing to look.",
-                            author: "Jonathan Bobrow"
+                            author: "Paul Henrique"
                         }
                     ];
                 }
@@ -318,12 +318,12 @@
                 const authorNameWords = author.split(/\s+/);
 
                 // add quote
-                words.forEach(word => buffer.pushWord(word));
+                words.forEach(word => buffer.pushWord(word.toUpperCase()));
                 buffer.flush();
 
                 // add author on the next line
                 buffer.pushWord(`-`);
-                authorNameWords.forEach(nameWord => buffer.pushWord(nameWord));
+                authorNameWords.forEach(nameWord => buffer.pushWord(nameWord.toUpperCase()));
                 buffer.flush();
 
                 return buffer.buffers;
