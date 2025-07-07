@@ -38,6 +38,70 @@
                 background-color: #000;
                 border-radius: 0px;
                 box-shadow: 0 0 12px 4px #000 inset;
+                position: relative;
+                cursor: pointer;
+            }
+
+            /* Fullscreen styles */
+            .displays:fullscreen {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 10vh 5vw;
+                box-sizing: border-box;
+            }
+
+            .displays:-webkit-full-screen {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 10vh 5vw;
+                box-sizing: border-box;
+            }
+
+            .displays:-moz-full-screen {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 10vh 5vw;
+                box-sizing: border-box;
+            }
+
+            .displays:-ms-fullscreen {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 10vh 5vw;
+                box-sizing: border-box;
+            }
+
+            /* Add fullscreen button */
+            .fullscreen-btn {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+                padding: 8px 12px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 12px;
+                opacity: 0;
+                transition: opacity 0.2s ease-in-out;
+            }
+
+            .displays:hover .fullscreen-btn {
+                opacity: 0.7;
+            }
+
+            .fullscreen-btn:hover {
+                opacity: 1;
+                background: rgba(255, 255, 255, 0.2);
             }
 
             .share-icon {
@@ -222,14 +286,15 @@
             <p>Please rotate your device horizontally to view inspirational quotes.</p>
         </div>
         <div class="page">
-            <div class="displays" onClick="shareQuote()">
+            <div class="displays" id="displaysContainer">
+                <button class="fullscreen-btn" onclick="toggleFullscreen(event)">⛶ Fullscreen</button>
                 <div class="activity"></div><input class="display M" />
                 <div class="activity"></div><input class="display M" />
                 <div class="activity"></div><input class="display M" />
                 <div class="activity"></div><input class="display M" />
                 <div class="activity"></div><input class="display M" />
                 <div class="activity"></div><input class="display M" />
-                <div class="share-icon">
+                <div class="share-icon" onclick="shareQuote(event)">
                     <svg id="bluesky" width="28" height="28" viewBox="0 0 512 451" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M110.976 30.336C169.696 74.4 232.832 163.776 256 211.712C279.2 163.776 342.304 74.432 401.024 30.336C443.36 -1.43998 512 -26.048 512 52.224C512 67.872 503.04 183.584 497.792 202.368C479.488 267.648 412.896 284.32 353.664 274.24C457.216 291.872 483.584 350.24 426.656 408.64C318.624 519.488 271.392 380.8 259.296 345.28C257.056 338.752 256 335.68 256 338.304C256 335.712 254.944 338.752 252.736 345.28C240.608 380.8 193.376 519.488 85.344 408.64C28.448 350.24 54.784 291.84 158.304 274.24C99.104 284.32 32.48 267.68 14.208 202.368C8.96 183.584 0 67.84 0 52.224C0 -26.048 68.64 -1.43998 110.976 30.336Z" fill="white"/>
                     </svg>
@@ -268,6 +333,54 @@
         <script>
             let flapDemo;
             var shareText;
+
+            // Fullscreen functionality
+            function toggleFullscreen(event) {
+                event.stopPropagation(); // Prevent the displays click handler from firing
+                
+                const displaysElement = document.getElementById('displaysContainer');
+                
+                if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+                    // Enter fullscreen
+                    if (displaysElement.requestFullscreen) {
+                        displaysElement.requestFullscreen();
+                    } else if (displaysElement.webkitRequestFullscreen) {
+                        displaysElement.webkitRequestFullscreen();
+                    } else if (displaysElement.mozRequestFullScreen) {
+                        displaysElement.mozRequestFullScreen();
+                    } else if (displaysElement.msRequestFullscreen) {
+                        displaysElement.msRequestFullscreen();
+                    }
+                } else {
+                    // Exit fullscreen
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                }
+            }
+
+            // Listen for fullscreen changes to update button text
+            document.addEventListener('fullscreenchange', updateFullscreenButton);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
+            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+
+            function updateFullscreenButton() {
+                const button = document.querySelector('.fullscreen-btn');
+                const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+                
+                if (isFullscreen) {
+                    button.textContent = '⛶ Exit Fullscreen';
+                } else {
+                    button.textContent = '⛶ Fullscreen';
+                }
+            }
 
             async function fetchQuotes() {
                 try {
@@ -358,7 +471,9 @@
                 }
             }
 
-            function shareQuote() {
+            function shareQuote(event) {
+                event.stopPropagation(); // Prevent the displays click handler from firing
+                
                 if(document.getElementById("twitter").style.display == "none") {
                     // bluesky quote
                     let shareURLbase = 'https://bsky.app/intent/compose?';
@@ -373,7 +488,6 @@
                     window.open(combinedURL);
                 }
             }
-
 
             window.onkeydown = function(e) {
                 if(e.keyCode==18) {
