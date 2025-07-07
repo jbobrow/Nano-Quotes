@@ -16,7 +16,7 @@
         <script src="src/flapdemo.js"></script>
         <style type="text/css">
             body {
-                font-family: "Neue Montreal", "Helvetica Neue", Arial, sans-serif;
+                font-family: "PP Neue Montreal", "Helvetica Neue", Arial, sans-serif;
                 color: #333;
                 background-color: #fff;
                 margin: 0;
@@ -296,7 +296,7 @@
                 padding-left: 10%;
                 padding-right: 10%;
                 z-index: 1000;
-                font-family: "Neue Montreal", "Helvetica Neue", Arial, sans-serif;
+                font-family: "PP Neue Montreal", "Helvetica Neue", Arial, sans-serif;
             }
 
             @media screen and (max-width: 768px) and (orientation: portrait) {
@@ -499,10 +499,7 @@
                 const formattedBuffers = formatQuoteForDisplay(quote, author, 22, 6); // Adjust width and line count
                 flapDemo.updateDisplay(formattedBuffers);
 
-                formatQuoteForShare(quote, author);
-                
-                // Restart fullscreen timer when quote changes
-                restartFullscreenTimer();
+                formatQuoteForShare(quote, author);                
             }
 
             async function init() {
