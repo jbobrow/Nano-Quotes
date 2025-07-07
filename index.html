@@ -50,6 +50,7 @@
                 align-items: center;
                 padding: 10vh 5vw;
                 box-sizing: border-box;
+                position: relative;
             }
 
             .displays:-webkit-full-screen {
@@ -59,6 +60,7 @@
                 align-items: center;
                 padding: 10vh 5vw;
                 box-sizing: border-box;
+                position: relative;
             }
 
             .displays:-moz-full-screen {
@@ -68,6 +70,7 @@
                 align-items: center;
                 padding: 10vh 5vw;
                 box-sizing: border-box;
+                position: relative;
             }
 
             .displays:-ms-fullscreen {
@@ -77,6 +80,38 @@
                 align-items: center;
                 padding: 10vh 5vw;
                 box-sizing: border-box;
+                position: relative;
+            }
+
+            /* Fullscreen timer stroke */
+            .fullscreen-timer {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 2px;
+                height: 100%;
+                background-color: #ED1C24;
+                transform-origin: top;
+                transform: scaleY(1);
+                transition: none;
+                display: block;
+                animation: fullscreenTimerShrink 30s linear infinite;
+            }
+
+            .displays:fullscreen .fullscreen-timer,
+            .displays:-webkit-full-screen .fullscreen-timer,
+            .displays:-moz-full-screen .fullscreen-timer,
+            .displays:-ms-fullscreen .fullscreen-timer {
+                display: block;
+            }
+
+            @keyframes fullscreenTimerShrink {
+                0% {
+                    transform: scaleY(1);
+                }
+                100% {
+                    transform: scaleY(0);
+                }
             }
 
             /* Add fullscreen button */
@@ -287,6 +322,7 @@
         </div>
         <div class="page">
             <div class="displays" id="displaysContainer">
+                <div class="fullscreen-timer"></div>
                 <button class="fullscreen-btn" onclick="toggleFullscreen(event)">⛶ Fullscreen</button>
                 <div class="activity"></div><input class="display M" />
                 <div class="activity"></div><input class="display M" />
@@ -365,11 +401,15 @@
                 }
             }
 
-            // Listen for fullscreen changes to update button text
-            document.addEventListener('fullscreenchange', updateFullscreenButton);
-            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
-            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
-            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+            // Listen for fullscreen changes to update button text and timer
+            document.addEventListener('fullscreenchange', handleFullscreenChange);
+            document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+            document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+            document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+
+            function handleFullscreenChange() {
+                updateFullscreenButton();
+            }
 
             function updateFullscreenButton() {
                 const button = document.querySelector('.fullscreen-btn');
@@ -460,6 +500,9 @@
                 flapDemo.updateDisplay(formattedBuffers);
 
                 formatQuoteForShare(quote, author);
+                
+                // Restart fullscreen timer when quote changes
+                restartFullscreenTimer();
             }
 
             async function init() {
